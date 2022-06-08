@@ -385,9 +385,16 @@ function sendBoosterMessage(member) {
   let memberHighestLvl = getHigestLevel(member.roles)
   let channelChatID = getChatIdByLvl(memberHighestLvl)
   const channel = client.channels.cache.get(channelChatID);
+  let filtered = (Object.entries(roles)).filter(([key, value]) => value.lvl === memberHighestLvl)[0][1];
+  let roleColor = filtered.color;
+
   if (channel != '') {
     let welcomeMsg = 'Let’s go <@' + member.user.id + '>, thanks for server boosting 🚀'
-    channel.send({ content: welcomeMsg })
+    const embedopen = new Discord.MessageEmbed()
+      .setDescription(welcomeMsg)
+      .setColor(roleColor);
+
+    channel.send({ embeds: [embedopen] })
       .then(function (message) {
         message.react("🔥")
           .then(console.log)
