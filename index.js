@@ -15,12 +15,12 @@ const roles = {
   hinin1_2: { lvl: 2, id: '980447527591616572', chatid: '' },
   hinin1_3: { lvl: 3, id: '980447588937523221', chatid: '' },
   hinin: { lvl: 4, id: '973246305545641984', chatid: '' },
-  shonin: { lvl: 5, id: '971712502230552626', chatid: '978286109635272714' },
-  shokunin: { lvl: 6, id: '971547768172716032', chatid: '972204262006345728' },
-  noka: { lvl: 7, id: '969701663344558130', chatid: '969702669507768392' },
-  samurai: { lvl: 8, id: '961561497115443250', chatid: '969703459983097956' },
-  daimyo: { lvl: 9, id: '971728564984635442', chatid: '972210778801315941' },
-  tenno: { lvl: 10, id: '961197439979761723', chatid: '972211000470286390' }
+  shonin: { lvl: 5, id: '971712502230552626', chatid: '978286109635272714', color: '#00ffff' },
+  shokunin: { lvl: 6, id: '971547768172716032', chatid: '972204262006345728', color: '#00ff00' },
+  noka: { lvl: 7, id: '969701663344558130', chatid: '969702669507768392', color: '#ffff00' },
+  samurai: { lvl: 8, id: '961561497115443250', chatid: '969703459983097956', color: '#ff0000' },
+  daimyo: { lvl: 9, id: '971728564984635442', chatid: '972210778801315941', color: '#ff9900' },
+  tenno: { lvl: 10, id: '961197439979761723', chatid: '972211000470286390', color: '#ff0000' },
 }
 const adviseChannels = [
   '961195429565988904',
@@ -137,7 +137,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     let reactedEmoji = reaction.emoji.name
     reaction.message.react(reactedEmoji)
     const shuffledEmoji = bulkReactEmoji.sort((a, b) => 0.5 - Math.random());
-    shuffledEmoji.forEach(async (e) => await reaction.message.react(e) )
+    shuffledEmoji.forEach(async (e) => await reaction.message.react(e))
     return
   }
 
@@ -343,32 +343,42 @@ function sendWelcomeMessage(member, newRole) {
   const channel = client.channels.cache.get(getChatIdByRole(newRole));
   if (channel != '') {
     let welcomeMsg = ''
+    let colorId = ''
 
     switch (newRole) {
       case roles.shonin.id:
+        colorId = roles.shonin.color
         welcomeMsg += '<@' + member.user.id + '> just reached Lv.2 - Shōnin 商人\n'
         welcomeMsg += 'Welcome to the ODA Clan, Kyodai, you now walk on the virtuous path.'
         break;
       case roles.shokunin.id:
+        colorId = roles.shokunin.color
         welcomeMsg += '<@' + member.user.id + '> just reached Lv.3 - Shokunin 職人\n'
         welcomeMsg += 'Congratulations on your well-deserved promotion, Kyodai, you have proved your worth by bringing value to the clan.'
         break;
       case roles.noka.id:
+        colorId = roles.noka.color
         welcomeMsg += '<@' + member.user.id + '> just reached Lv.4 - Nōka 農家\n'
         welcomeMsg += 'Congratulations on your well-deserved promotion, Kyodai, you are now an essential part of our community, thank you for your dedication.'
         break;
       case roles.samurai.id:
+        colorId = roles.samurai.color
         welcomeMsg += '<@' + member.user.id + '> just reached Lv.5 - Samurai 武士\n'
         welcomeMsg += 'Congratulations on becoming the true pillar of our community, Kyodai, you now have access to all the benefits and advantages that a true warrior deserves. '
         break;
     }
 
-    if (welcomeMsg != '') channel.send({ content: welcomeMsg })
-      .then(function(message) {
+    const embedopen = new Discord.MessageEmbed()
+      .setDescription(welcomeMsg)
+      .setColor(colorId);
+
+    if (welcomeMsg != '') {
+      channel.send({ embeds: [embedopen] }).then(function (message) {
         message.react("🔥")
           .then(console.log)
           .catch(console.error);
       });
+    }
   }
 }
 function sendBoosterMessage(member) {
@@ -378,7 +388,7 @@ function sendBoosterMessage(member) {
   if (channel != '') {
     let welcomeMsg = 'Let’s go <@' + member.user.id + '>, thanks for server boosting 🚀'
     channel.send({ content: welcomeMsg })
-      .then(function(message) {
+      .then(function (message) {
         message.react("🔥")
           .then(console.log)
           .catch(console.error);
