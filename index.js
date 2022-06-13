@@ -358,7 +358,7 @@ async function prepareAuthMessage() {
   const messages4 = await channel4.messages.fetch({ limit: 1 });
 
   const descr = [
-    "Hello stranger, before letting you access every section of our server,a task is presented to you.\n\n" +
+    "Hello stranger, before letting you access every section of our server, a task is presented to you.\n\n" +
     "**The following paragraphs will unfold in a path, one after the other, please read them carefully to understand the key concepts " +
     "that guide and inspire this Clan**.\n\nWe are the **ODA CLAN**; we use advanced software that process big data analytics to discover and " +
     "share with you the best Crypto and NFT projects.\n\nIf you are in a hurry, looking for a quick tip on where and how to invest, " +
@@ -369,7 +369,7 @@ async function prepareAuthMessage() {
     " below this message to unlock the path.**",
 
     "ODA means **Oracle Data Analytics**.\n" +
-    "By using software that analyses thousands of projects and \ncryptocurrencies every day, " +
+    "By using software that analyses thousands of projects and cryptocurrencies every day, " +
     "we will prove, and have proved many times already, that we are able to understand and " +
     "predict Crypto and NFT cycles before they manifest themselves.\n" +
     "We want to share some of our work with you.\n\n" +
@@ -377,7 +377,7 @@ async function prepareAuthMessage() {
     "who falls short on this will be held accountable.\n\n" +
     "**義, gi Righteousness.**\n\n" +
     "Be acutely honest throughout your dealings with all Kyodai.\n" +
-    "Believe in justice,\n" +
+    "Believe in justice.\n" +
     "To the true Kyodai, all points of view are deeply considered.\n" +
     "Kyodai make a full commitment to their decisions.\n\n" +
     "**勇, yū Heroic Courage.**\n\n" +
@@ -485,7 +485,7 @@ async function prepareAuthMessage() {
     );
     const embed1 = new MessageEmbed()
       .setColor("#00FF00")
-      .setTitle("Clan Verifiy")
+      .setTitle("Welcome to the Clan!")
       .setDescription(descr[0]);
 
     channel1.send({ embeds: [embed1], components: [row1] });
