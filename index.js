@@ -553,9 +553,9 @@ async function prepareAuthMessage() {
     return;
 
   const msgContent =
-    "Select the **three mistery words** from the **drop-down** menus below.\n" +
+    "Select the **three mistery words** from the **drop-down** menus below.\n\n" +
     "Once you have selected the exact words, you will automatically " +
-    "be promoted to **lvl 2** and can interact with the other members!";
+    "be promoted to **Lv.2 - Shōnin 商人** and can interact with the other members!";
 
   const select_1 = new MessageActionRow().addComponents(
     new MessageSelectMenu()
